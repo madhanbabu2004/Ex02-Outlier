@@ -43,3 +43,5 @@ print(df1)
 ## OUTPUT
 IQR
 ![output](./33.png)
+## RESULT
+The output of the program is excicuted successfully
