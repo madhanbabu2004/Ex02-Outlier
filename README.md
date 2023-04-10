@@ -1,6 +1,9 @@
 # Ex02-Outlier
+# AIM
 
-You are given bhp.csv which contains property prices in the city of banglore, India. You need to examine price_per_sqft column and do following,
+To identify given bhp.csv which contains property prices in the city of banglore, India. You need to examine price_per_sqft column and do following,
+
+# PROCEDURE
 
 (1) Remove outliers using IQR 
 
