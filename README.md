@@ -20,28 +20,52 @@ To identify given bhp.csv which contains property prices in the city of banglore
 ```
 import numpy as np
 import pandas as pd
-
-
-data = [73.84702,68.7819,74.11011,71.73098,69.8818,67.25302,68.78508,68.34852,67.01895,63.45649,71.19538,71.64081,64.76633,
-        69.28307,69.24373,67.64562,72.41832,63.97433,69.64006,67.936,67.9150,69.43944,66.14913,375.20597,7.8932,68.14403,
-        69.08963,72.80084,67.42124,68.49642,68.61811,74.03381,71.52822,69.18016,69.5772,70.40093,69.07617,67.19352,65.80732,
-        34.30419,67.97434,72.18943,65.27035,66.09018,67.51032,70.10479,68.25184,72.17271,69.17986,72.87036,64.78258,70.18355,68.49145,
-        67.33083,66.99094,66.49955,68.35306,70.77446,171.21592,70.01337,71.40318,69.55201,73.81853,66.99688,
-       71.41847,65.2793,68.27419,272.76537,68.09938,68.89671,69.28951,370.52322]
-
-df=pd.DataFrame(data)
-print(df)
-median=df.quantile(0.5)
+from scipy import stats
+a = pd.read_csv('bhp.csv')
+df = pd.DataFrame(a['price_per_sqft'])
+median = df.quantile(0.5)
 Q1 = df.quantile(0.25)
 Q3 = df.quantile(0.75)
-IQR = Q3-Q1
-low=Q1-1.5*IQR
-high=Q3+1.5*IQR
-df1=df[((df>=Q1-1.5*IQR)&(df<=Q3+1.5*IQR))]
+IQR = Q3 - Q1
+low = Q1 - 1.5 * IQR
+high = Q3 + 1.5 * IQR
+df1 = df[((df >= Q1 - 1.5 * IQR) & (df <= Q3 + 1.5 * IQR))]
 print(df1)
+z = np.abs(stats.zscore(df))
+df1 = df1[(z < 3)]
+print(df1)
+
+import numpy as np
+import pandas as pd
+from scipy import stats
+a = pd.read_csv('height_weight.csv')
+df = pd.DataFrame(a['height'])
+print(df)
+median = df.quantile(0.5)
+Q1 = df.quantile(0.25)
+Q3 = df.quantile(0.75)
+IQR = Q3 - Q1
+
+low = Q1 - 1.5 * IQR
+high = Q3 + 1.5 * IQR
+df1 = df[((df >= Q1 - 1.5 * IQR) & (df <= Q3 + 1.5 * IQR))]
+print(df1)
+df2 = pd.DataFrame(a['weight'])
+print(df2)
+q1 = df2.quantile(0.25)
+q3 = df2.quantile(0.75)
+IQR = q3 - q1
+df2_new = df2[((df2 >= q1 - 1.5 * IQR) & (df2 <= q3 + 1.5 * IQR))]
+print(df2_new)
 ```
 ## OUTPUT
 IQR
-![output](./33.png)
+![output](./a.png)
+![output](./b.png)
+![output](./c.png)
+![output](./d.png)
+![output](./e.png)
+![output](./f.png)
+![output](./g.png)
 ## RESULT
 The output of the program is excicuted successfully
